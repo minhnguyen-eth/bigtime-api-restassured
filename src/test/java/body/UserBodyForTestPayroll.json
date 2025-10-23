@@ -1,0 +1,82 @@
+
+{
+  "id": "u4jWLZwpBg",
+  "code": "NV811",
+  "name": "Minh",
+  "gender": true,
+  "birthday": null,
+  "phone": null,
+  "email": "minhnguyen.eth@gmail.com",
+  "address": null,
+  "fingerprint": null,
+  "avatar": null,
+  "barcode": null,
+  "tax_code": null,
+  "joining_date": null,
+  "position_id": null,
+  "branch_id": "arslWl62Hh",
+  "team_id": "QCw33NKxnX",
+  "level_id": null,
+  "user_type": 2,
+  "is_working": 1,
+  "code_identification": null,
+  "registered_at": null,
+  "registered_address": null,
+  "bank_name": null,
+  "bank_number": null,
+  "last_login_at": "",
+  "note": null,
+  "user_id_unique": 7543,
+  "is_active_mobile": true,
+  "setup_salary_id": "7hZ9r8Zt3O",
+  "status": 1,
+  "created_at": "2025-09-30T08:58:24.000000Z",
+  "created_by": "0000000000",
+  "updated_at": "2025-10-10T03:35:48.000000Z",
+  "updated_by": "0000000000",
+  "deleted_by": null,
+  "resume_id": null,
+  "is_must_check_in_at_shift_start": false,
+  "is_single_checkin_per_day": true,
+  "department_id": "2eti3miJZX",
+  "department_name": "Bộ phận IT",
+  "team_name": "Nhóm It1",
+  "branch_name": "Biên Hòa",
+  "level_name": null,
+  "position_name": null,
+  "setup_salary_user": {
+    "type": 0,
+    "salary": 500000,
+    "insurance_price": 0,
+    "setup_salary_user_allowance_types": [],
+    "is_allowance": false
+  },
+  "updated_by_name": {
+    "id": "0000000000",
+    "name": "admin"
+  },
+  "roles": [
+    {
+      "id": "gSVeYJ6b8n",
+      "name": "Nhân viên",
+      "slug": "nhan-vien",
+      "user_type_id": 2,
+      "color": "#5C6BC0"
+    }
+  ],
+  "branch": {
+    "id": "arslWl62Hh",
+    "name": "Biên Hòa",
+    "status": true
+  },
+  "position": null,
+  "level": null,
+  "employment_contracts": null,
+  "department_user": [],
+  "team": {
+    "id": "QCw33NKxnX",
+    "name": "Nhóm It1",
+    "department_id": "2eti3miJZX"
+  },
+  "user_family_members": []
+}

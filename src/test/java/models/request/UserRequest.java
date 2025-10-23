@@ -1,0 +1,157 @@
+package models.request;
+
+import base.CommonHeaders;
+import base.CommonRequest;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
+
+public class UserRequest extends CommonRequest {
+
+    /**
+     * Cập nhật thông tin user phục vụ test thuế (mock data)
+     * Backend Laravel yêu cầu "JsonData" là form field => multipart/form-data
+     */
+    public void updateUserForTaxTest(String token, int salary) {
+        // Format thời gian hiện tại ISO 8601 (Laravel dễ parse)
+        String now = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+
+        // Body gốc, các trường thời gian được thay bằng "null" hoặc thời gian hiện tại
+        String innerJson = """
+        {
+          "id": "u4jWLZwpBg",
+          "code": "NV811",
+          "name": "Minh",
+          "gender": true,
+          "birthday": null,
+          "phone": null,
+          "email": "minhnguyen.eth@gmail.com",
+          "address": null,
+          "fingerprint": null,
+          "avatar": null,
+          "barcode": null,
+          "tax_code": null,
+          "joining_date": null,
+          "position_id": null,
+          "branch_id": "arslWl62Hh",
+          "team_id": "QCw33NKxnX",
+          "level_id": null,
+          "user_type": 2,
+          "is_working": 1,
+          "code_identification": null,
+          "registered_at": null,
+          "registered_address": null,
+          "bank_name": null,
+          "bank_number": null,
+          "last_login_at": "%s",
+          "note": null,
+          "user_id_unique": 7543,
+          "is_active_mobile": true,
+          "setup_salary_id": "7hZ9r8Zt3O",
+          "status": 1,
+          "created_at": null,
+          "created_by": "0000000000",
+          "updated_at": "%s",
+          "updated_by": "0000000000",
+          "deleted_by": null,
+          "resume_id": null,
+          "is_must_check_in_at_shift_start": false,
+          "is_single_checkin_per_day": true,
+          "department_id": "2eti3miJZX",
+          "department_name": "Bộ phận IT",
+          "team_name": "Nhóm It1",
+          "branch_name": "Biên Hòa",
+          "level_name": null,
+          "position_name": null,
+          "setup_salary_user": {
+            "id": "7hZ9r8Zt3O",
+            "salary": %d,
+            "insurance_price": null,
+            "type": 1,
+            "created_at": null,
+            "created_by": "0000000000",
+            "updated_at": null,
+            "updated_by": "0000000000",
+            "deleted_by": null,
+            "setup_salary_user_allowance_types": [
+              {
+                "id": "uwCk8uDP9C",
+                "setup_salary_user_id": "7hZ9r8Zt3O",
+                "allowance_type_id": "Kp1lyzWTj5",
+                "salary": 2000000,
+                "type": 1,
+                "allowance": {
+                  "id": "Kp1lyzWTj5",
+                  "name": "Test thuế"
+                }
+              }
+            ]
+          },
+          "updated_by_name": {
+            "id": "0000000000",
+            "name": "admin"
+          },
+          "roles": [
+            {
+              "id": "gSVeYJ6b8n",
+              "name": "Nhân viên",
+              "slug": "nhan-vien",
+              "user_type_id": 2,
+              "color": "#5C6BC0"
+            }
+          ],
+          "branch": {
+            "id": "arslWl62Hh",
+            "name": "Biên Hòa",
+            "status": true
+          },
+          "position": null,
+          "level": null,
+          "employment_contracts": null,
+          "department_user": [],
+          "team": {
+            "id": "QCw33NKxnX",
+            "name": "Nhóm It1",
+            "department_id": "2eti3miJZX"
+          },
+          "user_family_members": [
+            {
+              "id": "VSfydRIjNr",
+              "user_id": "u4jWLZwpBg",
+              "name": "abc",
+              "relationship": 10,
+              "birthday": null,
+              "gender": false,
+              "phone": null,
+              "address": null,
+              "tax_code": null,
+              "is_dependent": true,
+              "tax_deduction_from_day": null,
+              "tax_deduction_to_day": null,
+              "note": null,
+              "created_at": null,
+              "created_by": "0000000000",
+              "updated_at": null,
+              "updated_by": "0000000000",
+              "deleted_by": null
+            }
+          ]
+        }
+        """.formatted(now, now, salary);
+
+        // Bỏ Content-Type để RestAssured tự set multipart
+        Map<String, String> headers = new HashMap<>(CommonHeaders.getAuthHeaders(token));
+        headers.remove("Content-Type");
+
+        Response res = RestAssured.given()
+                .relaxedHTTPSValidation()
+                .headers(headers)
+                .multiPart("JsonData", innerJson, "application/json")
+                .post("/api/user/update");
+
+        assertSuccess(res, "Cập nhật thành công!");
+    }
+}
